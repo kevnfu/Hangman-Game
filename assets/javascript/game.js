@@ -1,11 +1,16 @@
+'use strict';
+
 (function(){
-const LETTER = /^[a-zA-Z]$/; 
-let data = ["alphabet", "soup", "candy", "phenomenal"];
-let word = "";
+const LETTER = /^[a-zA-Z]$/;
+
+let data = ["alphabet", "soup", "candy", "phenomenal", "alternative", "themeless", "complete", "famous", "minimalism"];
 let wins = 0;
 let losses = 0;
+
 // correct stores false for indexes of var word where user hasn't guessed yet
+let word = "";
 let correct = [];
+
 let wrongGuesses = [];
 let guessesLeft = 0;
 
@@ -17,16 +22,16 @@ let scoreDisplay = document.getElementById('score');
 
 // sets up game initial state
 function newGame() {
-    guessesLeft = 12;
     word = data[Math.floor(Math.random() * data.length)];
     word = word.toUpperCase();
     console.log(word);
+    guessesLeft = 12;
     correct = [];
     wrongGuesses = [];
+
     for(let i=0; i<word.length; i++) {
         correct.push(false);
     }
-
     updateDisplays();
 }
 
@@ -57,7 +62,7 @@ document.onkeyup = function(event) {
     userGuess = userGuess.toUpperCase();
     
     // restrict to single letters
-    if (userGuess.length > 1 || !LETTER.test(userGuess)) {
+    if (!LETTER.test(userGuess)) {
         return;
     }
 
@@ -66,6 +71,7 @@ document.onkeyup = function(event) {
         // not previously guessed 
         if(wrongGuesses.indexOf(userGuess) === -1) {
             wrongGuesses.push(userGuess);
+            wrongGuesses.sort();
             guessesLeft--;
             // lose state
             if(guessesLeft == 0) {
