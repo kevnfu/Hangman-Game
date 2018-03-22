@@ -7,7 +7,7 @@ let data = ["alphabet", "soup", "candy", "phenomenal", "alternative", "themeless
 let wins = 0;
 let losses = 0;
 
-// correct stores false for indexes of var word where user hasn't guessed yet
+// correct is false for indexes of var word where user hasn't guessed yet
 let word = "";
 let correct = [];
 
@@ -22,13 +22,16 @@ let scoreDisplay = document.getElementById('score');
 
 // sets up game initial state
 function newGame() {
+    // pick random word
     word = data[Math.floor(Math.random() * data.length)];
     word = word.toUpperCase();
     console.log(word);
+    
     guessesLeft = 12;
     correct = [];
     wrongGuesses = [];
 
+    // populate correct
     for(let i=0; i<word.length; i++) {
         correct.push(false);
     }
